@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoSelf – Project Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #10b981;
+      --green-dark: #059669;
+      --green-light: #d1fae5;
+      --green-mid: #6ee7b7;
+      --teal: #0d9488;
+      --slate: #1e293b;
+      --slate-mid: #475569;
+      --slate-light: #94a3b8;
+      --slate-bg: #f1f5f9;
+      --white: #ffffff;
+      --purple: #7c3aed;
+      --amber: #d97706;
+      --blue: #2563eb;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background: #f8fafc;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .no-print { display: none !important; }
+      .page { box-shadow: none; border-radius: 0; margin: 0; page-break-after: always; }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    /* ── COMMON ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      margin: 20px auto;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── COVER PAGE ── */
+    .cover {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #0d9488 100%);
+      height: 100%;
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(110,231,183,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(13,148,136,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-logo {
+      width: 90px; height: 90px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 28px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      position: relative; z-index: 2;
+    }
+
+    .cover-logo svg { width: 48px; height: 48px; }
+
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      position: relative; z-index: 2;
+      margin-bottom: 8px;
+    }
+
+    .cover-tagline {
+      font-size: 18px;
+      color: #6ee7b7;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      position: relative; z-index: 2;
+    }
+
+    .cover-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      max-width: 480px;
+      line-height: 1.7;
+      position: relative; z-index: 2;
+      margin-bottom: 48px;
+    }
+
+    .cover-badges {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      justify-content: center;
+      position: relative; z-index: 2;
+      margin-bottom: 60px;
+    }
+
+    .cover-badge {
+      padding: 8px 20px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+    }
+
+    .cover-meta {
+      position: relative; z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 30px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cover-meta span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+    }
+
+    .cover-version {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+
+    /* ── CONTENT PAGES ── */
+    .content-page {
+      padding: 0;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, #064e3b, #065f46);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-header-title {
+      font-size: 13px;
+      color: #6ee7b7;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .page-header-brand {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+    }
+
+    .page-body {
+      padding: 44px 48px;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: var(--green-light);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .section-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    h2.sec-title {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--slate);
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    h2.sec-title span { color: var(--green-dark); }
+
+    .sec-subtitle {
+      font-size: 14px;
+      color: var(--slate-mid);
+      font-weight: 400;
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--green-light), transparent);
+      margin: 32px 0;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--slate-bg);
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+
+    .card-green {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-color: #bbf7d0;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--slate-mid);
+      line-height: 1.65;
+    }
+
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+    /* ── FEATURE CARD ── */
+    .feature-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--teal));
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 12px;
+      color: var(--slate-mid);
+      line-height: 1.6;
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-green { background: var(--green-light); color: var(--green-dark); }
+    .badge-purple { background: #ede9fe; color: var(--purple); }
+    .badge-amber { background: #fef3c7; color: var(--amber); }
+    .badge-blue { background: #dbeafe; color: var(--blue); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+
+    /* ── TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      background: linear-gradient(135deg, #064e3b, #065f46);
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    th:first-child { border-radius: 8px 0 0 8px; }
+    th:last-child { border-radius: 0 8px 8px 0; }
+
+    td {
+      padding: 11px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--slate-mid);
+      font-size: 13px;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    td:first-child { color: var(--slate); font-weight: 600; }
+
+    /* ── NUMBERED STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--green), var(--teal));
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate);
+      margin-bottom: 3px;
+    }
+
+    .step-content p {
+      font-size: 12.5px;
+      color: var(--slate-mid);
+      line-height: 1.6;
+    }
+
+    /* ── STAT BOXES ── */
+    .stat-row { display: flex; gap: 14px; margin-bottom: 20px; }
+
+    .stat-box {
+      flex: 1;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-box .num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--green-dark);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-box .label {
+      font-size: 11px;
+      color: var(--slate-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 1.5px solid #6ee7b7;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #065f46;
+      margin-bottom: 6px;
+    }
+
+    .highlight p {
+      font-size: 13px;
+      color: #047857;
+      line-height: 1.65;
+    }
+
+    /* ── FLOW DIAGRAM ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .flow-node {
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate);
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .flow-node.active {
+      background: linear-gradient(135deg, var(--green), var(--teal));
+      color: white;
+      border-color: transparent;
+    }
+
+    .flow-arrow {
+      font-size: 18px;
+      color: var(--slate-light);
+      margin: 0 8px;
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 18px 22px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 16px 0;
+    }
+
+    .code-block .kw { color: #818cf8; }
+    .code-block .str { color: #6ee7b7; }
+    .code-block .fn { color: #fbbf24; }
+    .code-block .cmt { color: #475569; font-style: italic; }
+
+    /* ── PRINT BTN ── */
+    .print-btn-wrap {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      z-index: 999;
+    }
+
+    .print-btn {
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--green), var(--teal));
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s;
+    }
+
+    .print-btn:hover { transform: scale(1.05); }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 16px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-footer span {
+      font-size: 11px;
+      color: var(--slate-light);
+      font-weight: 500;
+    }
+
+    .page-num {
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 3px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    ul.check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    ul.check-list li {
+      font-size: 13px;
+      color: var(--slate-mid);
+      padding-left: 24px;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    ul.check-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate);
+      margin: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PRINT BUTTON -->
+<div class="print-btn-wrap no-print">
+  <button class="print-btn" onclick="window.print()">
+    🖨️ Save as PDF (Ctrl+P)
+  </button>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 1 – COVER ═══════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-logo">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 6C24 6 8 16 8 28C8 36.8 15.2 44 24 44C32.8 44 40 36.8 40 28C40 16 24 6 24 6Z" fill="rgba(255,255,255,0.9)"/>
+        <path d="M24 14C24 14 15 21 15 28C15 32.4 19.1 36 24 36C28.9 36 33 32.4 33 28C33 21 24 14 24 14Z" fill="#10b981"/>
+        <path d="M24 20L24 36" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <h1>EcoSelf</h1>
+    <div class="cover-tagline">🌿 Track. Compete. Conserve.</div>
+    <p class="cover-desc">
+      India ka pehla gamified carbon footprint tracking platform jo college students ke liye design kiya gaya hai — IITs, NITs aur premier campuses ke liye.<br/><br/>
+      <em>India's first gamified campus carbon footprint tracker for college students.</em>
+    </p>
+
+    <div class="cover-badges">
+      <span class="cover-badge">⚛️ React 19 + TypeScript</span>
+      <span class="cover-badge">⚡ Vite 6</span>
+      <span class="cover-badge">🎨 Tailwind CSS v4</span>
+      <span class="cover-badge">🤖 Gemini AI</span>
+      <span class="cover-badge">🗺️ Campus Map Explorer</span>
+    </div>
+
+    <div class="cover-meta">
+      <span>📅 EcoSelf – Campus Stewardship Platform</span>
+      <span class="cover-version">v1.0 Final</span>
+      <span>Made with 💚 for Indian Campuses</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 2 – TOC + OVERVIEW ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Table of Contents</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>Vishay Suchi</div>
+    <h2 class="sec-title">Is Document mein <span>Kya Hai?</span></h2>
+    <p class="sec-subtitle">Yeh documentation EcoSelf project ki poori jaankari deta hai — concept se lekar code tak sab kuch.</p>
+
+    <div class="grid-2">
+      <div class="card card-green">
+        <h3>📌 Section 1 – Project Overview</h3>
+        <p>App kya hai, kiske liye hai, aur kya problem solve karta hai — puri story in short.</p>
+      </div>
+      <div class="card card-green">
+        <h3>🎯 Section 2 – Problem Statement</h3>
+        <p>Indian college students ke carbon footprint ke baare mein awareness ki kami aur iska solution.</p>
+      </div>
+      <div class="card card-green">
+        <h3>🖥️ Section 3 – App Features (7 Screens)</h3>
+        <p>Har screen ka detail — Landing, Quiz, Dashboard, Insights, Leaderboard, Map, Profile.</p>
+      </div>
+      <div class="card card-green">
+        <h3>⚙️ Section 4 – Technical Architecture</h3>
+        <p>Tech stack, file structure, components, aur kaise sab kuch kaam karta hai.</p>
+      </div>
+      <div class="card card-green">
+        <h3>🏆 Section 5 – Gamification System</h3>
+        <p>Points, levels, leaderboard — user ko engaged rakhne ka poora system.</p>
+      </div>
+      <div class="card card-green">
+        <h3>🚀 Section 6 – Deployment Guide</h3>
+        <p>Netlify pe deploy karne ka step-by-step guide.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="num">7</div>
+        <div class="label">App Screens</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">9</div>
+        <div class="label">Components</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">4</div>
+        <div class="label">CO₂ Categories</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">5</div>
+        <div class="label">Quiz Questions</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 2</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 3 – PROBLEM + OVERVIEW ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Section 1 & 2 — Overview & Problem</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>Parichay</div>
+    <h2 class="sec-title">EcoSelf <span>Kya Hai?</span></h2>
+    <p class="sec-subtitle">EcoSelf ek web-based platform hai jo Indian college students ke daily carbon footprint ko track, visualize aur reduce karne mein help karta hai — gamification ke through.</p>
+
+    <div class="highlight">
+      <h4>🌿 Core Mission (Mukhya Uddeshya)</h4>
+      <p>Har student ka daily carbon footprint measure karna — travel, food, energy aur waste ke basis par — aur unhein eco-friendly choices lene ke liye motivate karna through points, leaderboard aur AI recommendations.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-tag"><span class="section-dot"></span>Samasya</div>
+    <h2 class="sec-title">Problem <span>Statement</span></h2>
+
+    <!-- Official Problem Statement Dark Box -->
+    <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; position: relative; overflow: hidden;">
+      <div style="position:absolute; top:-20px; right:-20px; width:120px; height:120px; background:radial-gradient(circle, rgba(16,185,129,0.15), transparent); border-radius:50%;"></div>
+      <p style="font-size:11px; font-weight:700; color:#6ee7b7; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px;">📌 Official Problem Statement</p>
+      <p style="font-size:18px; font-weight:800; color:white; line-height:1.6; letter-spacing:-0.3px; font-style:italic;">
+        "Design a solution that helps individuals
+        <span style="color:#6ee7b7;">understand</span>,
+        <span style="color:#34d399;">track</span>, and
+        <span style="color:#a7f3d0;">reduce</span> their carbon footprint through
+        <span style="color:#fbbf24;">simple actions</span> and
+        <span style="color:#c4b5fd;">personalized insights</span>."
+      </p>
+    </div>
+
+    <!-- Alignment Table -->
+    <h3 style="font-size:15px; font-weight:800; color:var(--slate); margin-bottom:12px;">✅ EcoSelf Is Problem Ko Kaise Solve Karta Hai?</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Problem Statement Ka Hissa</th>
+          <th>EcoSelf Feature</th>
+          <th>Screen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🧠 "Understand" — samajhna</td>
+          <td>Category Breakdown chart, You vs Campus comparison bar, Timeline sparkline</td>
+          <td><span class="badge badge-blue">Insights</span></td>
+        </tr>
+        <tr>
+          <td>📝 "Track" — track karna</td>
+          <td>Daily Score Gauge (0–100), Weekly bar chart Mon–Sun, Activity Feed with timestamps, CO₂ savings counter</td>
+          <td><span class="badge badge-green">Dashboard</span></td>
+        </tr>
+        <tr>
+          <td>📉 "Reduce" — kam karna</td>
+          <td>AI Green Targets: Cycling −40kg, Plant-Based Days −15kg, Phantom Load −5kg. Campus Map eco check-ins.</td>
+          <td><span class="badge badge-amber">Insights + Map</span></td>
+        </tr>
+        <tr>
+          <td>⚡ "Simple actions" — aasaan kaam</td>
+          <td>1-click Quick Log buttons (Bottle +5pts, Bus +15pts, Vegan +10pts). Custom log bhi possible.</td>
+          <td><span class="badge badge-purple">Quick Log</span></td>
+        </tr>
+        <tr>
+          <td>🎯 "Personalized insights" — personal</td>
+          <td>Baseline Quiz — commute, diet, energy answers se har user ka alag footprint aur AI suggestions</td>
+          <td><span class="badge badge-red">Baseline Quiz</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Presentation Script Box -->
+    <div style="margin-top:20px; background:#fffbeb; border:1.5px solid #fde68a; border-radius:14px; padding:18px 22px;">
+      <p style="font-size:11px; font-weight:800; color:#92400e; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px;">🎤 Presentation Mein Aise Bolein</p>
+      <p style="font-size:13px; color:#78350f; line-height:1.8; font-style:italic;">
+        "Our problem statement was — <strong>'Design a solution that helps individuals understand, track, and reduce their carbon footprint through simple actions and personalized insights.'</strong>
+        EcoSelf addresses every part: the <strong>Insights page</strong> helps users understand their footprint visually through charts,
+        the <strong>Dashboard</strong> tracks it in real-time with daily goals,
+        <strong>AI Targets</strong> actively guide reduction with quantified savings,
+        <strong>Quick Log</strong> makes eco-actions possible in one click,
+        and the <strong>Baseline Quiz</strong> makes everything personalized to each individual user."
+      </p>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 3</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 4 – APP SCREENS (Part 1) ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Section 3 — App Screens (Part 1)</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>App Ki Khasiyatein</div>
+    <h2 class="sec-title">7 Main <span>Screens</span></h2>
+    <p class="sec-subtitle">EcoSelf mein 7 alag screens hain, har ek apna alag kaam karta hai.</p>
+
+    <!-- Screen 1 -->
+    <div class="feature-card" style="margin-bottom:16px;">
+      <div class="feature-icon" style="background:#ecfdf5;">🏠</div>
+      <h4>Screen 1 – Landing Page (Hero Section)</h4>
+      <p><strong>File:</strong> <code>HeroSection.tsx</code></p>
+      <p>Yeh app ka pehla page hai. Isme tagline hai <em>"Track, Compete, Conserve"</em>, CTA button hai "Start Tracking", features ka bento grid hai, aur 10,000+ students ka social proof diya gaya hai. IIT Delhi, NIT Trichy, IIT Bombay ke logos dikhaye gaye hain. Footer mein Privacy Policy, Terms aur Campus Map ke links hain.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-green">Start Tracking Button</span>
+        <span class="badge badge-blue">Feature Grid</span>
+        <span class="badge badge-amber">Social Proof</span>
+      </div>
+    </div>
+
+    <!-- Screen 2 -->
+    <div class="feature-card" style="margin-bottom:16px;">
+      <div class="feature-icon" style="background:#fef3c7;">📋</div>
+      <h4>Screen 2 – Baseline Quiz (Prarambhik Pariksha)</h4>
+      <p><strong>File:</strong> <code>BaselineQuiz.tsx</code></p>
+      <p>Pehli baar login karne par user se 3 sawaal puche jaate hain: (1) Aap campus mein kaise aate-jaate hain? (Walk/Bike, Public Transit, Drive Solo), (2) Aapka diet kaisa hai? (Vegan, Vegetarian, Mixed, Heavy Meat), (3) Energy usage kaisi hai? (Optimal, Average, Heavy). In answers ke basis par user ka initial CO₂ footprint set hota hai. Complete karne par +50 bonus points milte hain.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-green">+50 Bonus Points</span>
+        <span class="badge badge-purple">3 Sawaal</span>
+        <span class="badge badge-amber">Personalized Setup</span>
+      </div>
+    </div>
+
+    <!-- Screen 3 -->
+    <div class="feature-card" style="margin-bottom:0;">
+      <div class="feature-icon" style="background:#ede9fe;">📊</div>
+      <h4>Screen 3 – Dashboard (Mukhya Page)</h4>
+      <p><strong>File:</strong> <code>App.tsx</code> (Dashboard case)</p>
+      <p>Main screen. Isme teen columns hain: <strong>Left:</strong> Daily Score gauge (circle meter 0–100), Quick Log buttons (Reusable Bottle +5pts, Public Transit +15pts, Vegan Meal +10pts). <strong>Center:</strong> Weekly bar chart (Mon–Sun), cumulative CO₂ savings, quiz challenge card. <strong>Right:</strong> Top 3 leaderboard champions + user ka rank card. Neecha: Recent activity feed with timestamps.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-green">Live Score Gauge</span>
+        <span class="badge badge-blue">Weekly Chart</span>
+        <span class="badge badge-amber">Activity Feed</span>
+        <span class="badge badge-red">Real-time Points</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 5 – APP SCREENS (Part 2) ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Section 3 — App Screens (Part 2)</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <!-- Screen 4 -->
+    <div class="feature-card" style="margin-bottom:16px;">
+      <div class="feature-icon" style="background:#dbeafe;">📈</div>
+      <h4>Screen 4 – Insights View (Gehri Jaankari)</h4>
+      <p><strong>File:</strong> <code>InsightsView.tsx</code></p>
+      <p>Deep analytics screen. Isme hai: (1) <strong>Category Breakdown</strong> — Travel, Food, Energy, Waste ka percentage aur kg CO₂ — color-coded progress bars ke saath. (2) <strong>You vs Campus Standard</strong> — vertical bar comparison. Campus average 340kg/month ke against aapka footprint. (3) <strong>AI Green Targets</strong> — 3 personalized recommendations: "Switch to Cycling" (-40kg, +25pts), "Plant-Based Days" (-15kg, +15pts), "Stop Phantom Load" (-5kg, +10pts). (4) <strong>Timeline Chart</strong> — Week 1 se Week 4 tak sparkline graph. 1W/1M/1Y filter.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-green">AI Recommendations</span>
+        <span class="badge badge-blue">Category Bars</span>
+        <span class="badge badge-purple">Timeline Graph</span>
+      </div>
+    </div>
+
+    <!-- Screen 5 -->
+    <div class="feature-card" style="margin-bottom:16px;">
+      <div class="feature-icon" style="background:#fce7f3;">🏆</div>
+      <h4>Screen 5 – Leaderboard (Pratiyogita Suchi)</h4>
+      <p><strong>File:</strong> <code>LeaderboardView.tsx</code></p>
+      <p>Do tabs: <strong>Students</strong> aur <strong>Campuses</strong>. Students leaderboard mein rank, photo, name, campus, level aur points dikhte hain. Top 3 ko gold/silver/bronze highlight milta hai. User ka apna rank highlighted hota hai. Campus leaderboard mein IIT Bombay, NIT Trichy, BITS Pilani, IIT Delhi, IIT Madras ki CO₂ reduction (kg) aur percentage change dikhti hai.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-amber">Student Rankings</span>
+        <span class="badge badge-green">Campus Rankings</span>
+        <span class="badge badge-blue">Your Rank Highlighted</span>
+      </div>
+    </div>
+
+    <!-- Screen 6 -->
+    <div class="feature-card" style="margin-bottom:16px;">
+      <div class="feature-icon" style="background:#f0fdf4;">🗺️</div>
+      <h4>Screen 6 – Campus Map Explorer</h4>
+      <p><strong>File:</strong> <code>MapExplorer.tsx</code></p>
+      <p>Interactive campus map jahan sustainable locations mark hain — Solar Panel Zone, Bicycle Hub, Green Cafeteria, Recycling Center, Water Conservation Point. Har location pe click karne par information aur "Check In" button aata hai. Check-in se points milte hain aur CO₂ savings log hoti hai.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-green">Location Check-ins</span>
+        <span class="badge badge-blue">Earn Points</span>
+        <span class="badge badge-amber">Campus Hotspots</span>
+      </div>
+    </div>
+
+    <!-- Screen 7 -->
+    <div class="feature-card" style="margin-bottom:0;">
+      <div class="feature-icon" style="background:#fff7ed;">🧠</div>
+      <h4>Screen 7 – Eco Quiz (Paristhitiki Prashnottar)</h4>
+      <p><strong>File:</strong> <code>QuizView.tsx</code></p>
+      <p>5 MCQ questions about Indian campus sustainability. Topics: low-carbon travel, plant-based meals CO₂ savings, phantom power, localized carbon factors, campus solar initiatives. Har sahi jawab ke liye +10 points milte hain. Quiz complete karne par bonus reward bhi milta hai. Explanations ke saath feedback diya jaata hai.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="badge badge-green">+50 Max Points</span>
+        <span class="badge badge-purple">5 Questions</span>
+        <span class="badge badge-blue">Explanations</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 6 – GAMIFICATION ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Section 5 — Gamification System</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>Khel Ka System</div>
+    <h2 class="sec-title">Points & <span>Level System</span></h2>
+    <p class="sec-subtitle">EcoSelf ka gamification engine users ko daily engage rakhta hai — jaise ek game mein hota hai.</p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="num" style="color:#d97706;">420</div>
+        <div class="label">Starting Points</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">12</div>
+        <div class="label">Starting Level</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">+100</div>
+        <div class="label">Pts per Level Up</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">∞</div>
+        <div class="label">Max Level (No Cap)</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size:18px; font-weight:800; margin-bottom:16px; color:var(--slate);">🏅 Points Kaise Milte Hain?</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>Points</th>
+          <th>CO₂ Saving</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Reusable Bottle Refill</td><td>+5 pts</td><td>-0.3 kg</td><td><span class="badge badge-blue">Waste</span></td></tr>
+        <tr><td>Plant-Based Meal (Vegan)</td><td>+10 pts</td><td>-0.9 kg</td><td><span class="badge badge-purple">Food</span></td></tr>
+        <tr><td>Public Transit / Bus</td><td>+15 pts</td><td>-1.8 kg</td><td><span class="badge badge-green">Travel</span></td></tr>
+        <tr><td>Baseline Quiz Complete</td><td>+50 pts</td><td>Setup</td><td><span class="badge badge-amber">Onboarding</span></td></tr>
+        <tr><td>Eco Quiz (per question)</td><td>+10 pts</td><td>–</td><td><span class="badge badge-purple">Learning</span></td></tr>
+        <tr><td>Campus Map Check-in</td><td>Varies</td><td>Varies</td><td><span class="badge badge-green">Explore</span></td></tr>
+        <tr><td>AI Target Commit: Cycling</td><td>+25 pts</td><td>-40 kg</td><td><span class="badge badge-green">Travel</span></td></tr>
+        <tr><td>AI Target: Plant-Based Days</td><td>+15 pts</td><td>-15 kg</td><td><span class="badge badge-purple">Food</span></td></tr>
+        <tr><td>AI Target: Stop Phantom Load</td><td>+10 pts</td><td>-5 kg</td><td><span class="badge badge-amber">Energy</span></td></tr>
+        <tr><td>Quick Log (Custom)</td><td>Custom</td><td>Custom</td><td><span class="badge badge-blue">All</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="highlight">
+      <h4>💾 Data Persistence (Data Kahan Save Hota Hai?)</h4>
+      <p>Saare points, level, profile (naam, avatar, bio), activity logs — sab kuch <strong>localStorage</strong> mein save hota hai. Matlab page refresh karne ke baad bhi sab data rehta hai. Koi backend server nahi chahiye — purely frontend-based storage.</p>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:800; margin-bottom:16px; margin-top:24px; color:var(--slate);">📊 Daily Score System</h3>
+    <p style="font-size:13px; color:var(--slate-mid); margin-bottom:12px;">Dashboard par ek circular gauge dikhta hai (0 se 100). Har activity se score badhta hai. 100 reach karne par <em>"Daily Target Met! Stellar Stewardship!"</em> message dikhta hai. Isse user ko rozana app kholine ka reason milta hai.</p>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 6</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 7 – TECH ARCHITECTURE ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Section 4 — Technical Architecture</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>Takneeki Dhanche</div>
+    <h2 class="sec-title">Tech Stack & <span>Architecture</span></h2>
+    <p class="sec-subtitle">EcoSelf ek modern React SPA hai jo Vite se powered hai — fast, lightweight aur production-ready.</p>
+
+    <div class="grid-3" style="margin-bottom:20px;">
+      <div class="card" style="text-align:center; padding:16px;">
+        <div style="font-size:28px; margin-bottom:8px;">⚛️</div>
+        <h3 style="font-size:13px; margin-bottom:4px;">React 19</h3>
+        <p style="font-size:11px;">Frontend UI library. Hooks: useState, useEffect, useRef</p>
+      </div>
+      <div class="card" style="text-align:center; padding:16px;">
+        <div style="font-size:28px; margin-bottom:8px;">📘</div>
+        <h3 style="font-size:13px; margin-bottom:4px;">TypeScript</h3>
+        <p style="font-size:11px;">Type-safe code. Interfaces, Enums, Generics use kiye gaye</p>
+      </div>
+      <div class="card" style="text-align:center; padding:16px;">
+        <div style="font-size:28px; margin-bottom:8px;">⚡</div>
+        <h3 style="font-size:13px; margin-bottom:4px;">Vite 6</h3>
+        <p style="font-size:11px;">Ultra-fast build tool. Hot Module Replacement, instant dev server</p>
+      </div>
+      <div class="card" style="text-align:center; padding:16px;">
+        <div style="font-size:28px; margin-bottom:8px;">🎨</div>
+        <h3 style="font-size:13px; margin-bottom:4px;">Tailwind CSS v4</h3>
+        <p style="font-size:11px;">Utility-first CSS. Custom tokens: clay-card, clay-btn-primary</p>
+      </div>
+      <div class="card" style="text-align:center; padding:16px;">
+        <div style="font-size:28px; margin-bottom:8px;">🎯</div>
+        <h3 style="font-size:13px; margin-bottom:4px;">Lucide React</h3>
+        <p style="font-size:11px;">Icon library. Leaf, Trophy, Route, Utensils, Zap icons use kiye</p>
+      </div>
+      <div class="card" style="text-align:center; padding:16px;">
+        <div style="font-size:28px; margin-bottom:8px;">🤖</div>
+        <h3 style="font-size:13px; margin-bottom:4px;">Gemini AI</h3>
+        <p style="font-size:11px;">@google/genai package. API key se AI features enable hote hain</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size:18px; font-weight:800; margin-bottom:14px; color:var(--slate);">📁 File Structure</h3>
+
+    <div class="code-block">
+      <span class="cmt">// EcoSelf – Project Structure</span><br/>
+      📦 eco-self-final/<br/>
+      ├── <span class="str">src/</span><br/>
+      │   ├── <span class="fn">App.tsx</span>          <span class="cmt">← Main app, state management, routing</span><br/>
+      │   ├── <span class="fn">types.ts</span>         <span class="cmt">← AppScreen enum, interfaces</span><br/>
+      │   ├── <span class="fn">data.ts</span>          <span class="cmt">← Student ranks, campus data, quiz questions</span><br/>
+      │   ├── <span class="fn">index.css</span>        <span class="cmt">← Global styles, clay design tokens</span><br/>
+      │   └── <span class="str">components/</span><br/>
+      │       ├── <span class="kw">HeroSection.tsx</span>       Landing page<br/>
+      │       ├── <span class="kw">BaselineQuiz.tsx</span>      Onboarding quiz<br/>
+      │       ├── <span class="kw">Sidebar.tsx</span>           Desktop nav + profile<br/>
+      │       ├── <span class="kw">BottomNav.tsx</span>         Mobile navigation<br/>
+      │       ├── <span class="kw">InsightsView.tsx</span>      Analytics screen<br/>
+      │       ├── <span class="kw">LeaderboardView.tsx</span>   Rankings screen<br/>
+      │       ├── <span class="kw">MapExplorer.tsx</span>       Campus map<br/>
+      │       ├── <span class="kw">QuizView.tsx</span>          Eco quiz<br/>
+      │       ├── <span class="kw">QuickLogModal.tsx</span>     Log activity modal<br/>
+      │       └── <span class="kw">ProfileEditModal.tsx</span>  Profile edit modal<br/>
+      ├── <span class="fn">index.html</span>           Entry point<br/>
+      ├── <span class="fn">vite.config.ts</span>       Build config<br/>
+      └── <span class="fn">.env.example</span>         GEMINI_API_KEY template
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size:16px; font-weight:800; margin-bottom:12px; color:var(--slate);">🔄 App Navigation Flow</h3>
+    <div class="flow">
+      <div class="flow-node">Landing</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node active">Baseline Quiz</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">Dashboard</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">Insights</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">Leaderboard</div>
+    </div>
+    <p style="font-size:12px; color:var(--slate-light); margin-top:6px;">AppScreen enum ke through state-based routing hoti hai — koi React Router nahi. Sidebar aur BottomNav se navigate karte hain.</p>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 7</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 8 – PROFILE + DEPLOYMENT ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Section 6 — Profile System & Deployment</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>Profile System</div>
+    <h2 class="sec-title">Profile <span>Edit Feature</span></h2>
+    <p class="sec-subtitle">User apna naam, avatar aur bio change kar sakta hai — sab kuch localStorage mein save hota hai.</p>
+
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card card-green">
+        <h3>🖼️ Avatar Options</h3>
+        <p>6 preset Unsplash photos mein se choose kar sakte hain, ya apni custom image URL paste kar sakte hain. Avatar sahi na load ho toh fallback image automatically aata hai.</p>
+      </div>
+      <div class="card card-green">
+        <h3>✏️ Kahan se Open Karein?</h3>
+        <p>Desktop: Sidebar par profile card pe hover karo → pencil icon aayega → click karo. Top-bar: Apna avatar (top-right) pe click karo. Dono se modal khulta hai.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-tag"><span class="section-dot"></span>Deploy Karna</div>
+    <h2 class="sec-title">Netlify pe <span>Deploy Guide</span></h2>
+    <p class="sec-subtitle">EcoSelf ko publicly live karna bahut aasaan hai — sirf 5 minutes lagte hain.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Dependencies Install Karein</h4>
+          <p>Terminal mein project folder mein jaao aur <code>npm install</code> run karo. Isse saare required packages install ho jaayenge.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Production Build Banao</h4>
+          <p><code>npm run build</code> command se <code>dist/</code> folder banega. Isme optimized HTML, CSS aur JS files hongi — 303kb JS + 61kb CSS total size.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Netlify pe Upload Karo</h4>
+          <p><a href="https://app.netlify.com" style="color:var(--green-dark);">app.netlify.com</a> pe jaao → Login karo → Dashboard pe <code>dist</code> folder drag & drop karo. Ya GitHub se connect karke auto-deploy setup karo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>GEMINI_API_KEY Set Karo</h4>
+          <p>Netlify Dashboard → Site Settings → Environment Variables → Add Variable: Key = <code>GEMINI_API_KEY</code>, Value = Apni Gemini API key. Phir redeploy karo. Bina is key ke AI features kaam nahi karenge.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>App Live!</h4>
+          <p>Netlify ek random URL dega jaise <code>ecoself-xyz.netlify.app</code>. Ise share karo. Custom domain bhi add kar sakte ho jaise <code>ecoself.in</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top:20px;">
+      <h4>⚙️ Build Settings (GitHub Connect ke liye)</h4>
+      <p><strong>Build Command:</strong> <code>npm run build</code> &nbsp;&nbsp;&nbsp; <strong>Publish Directory:</strong> <code>dist</code> &nbsp;&nbsp;&nbsp; <strong>Node Version:</strong> 18+</p>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 8</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE 9 – SUMMARY ═══════════════════════════════ -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="page-header-title">Summary & Conclusion</span>
+    <span class="page-header-brand">EcoSelf Documentation</span>
+  </div>
+  <div class="page-body">
+
+    <div class="section-tag"><span class="section-dot"></span>Saar</div>
+    <h2 class="sec-title">EcoSelf – <span>Project Summary</span></h2>
+    <p class="sec-subtitle">Ek pankti mein: EcoSelf woh platform hai jo Indian college students ko unke carbon footprint ke baare mein aware karta hai aur eco-friendly choices ke liye reward deta hai.</p>
+
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div>
+        <h3 style="font-size:16px; font-weight:800; margin-bottom:12px; color:var(--slate);">✅ Kya Achieve Kiya?</h3>
+        <ul class="check-list">
+          <li>7 fully functional screens with smooth navigation</li>
+          <li>Personalized carbon footprint based on user quiz answers</li>
+          <li>Real-time points & level system with localStorage persistence</li>
+          <li>AI-powered reduction recommendations (Insights page)</li>
+          <li>Campus & Student leaderboard system</li>
+          <li>Interactive Campus Map with eco-location check-ins</li>
+          <li>5-question Eco Quiz with explanations</li>
+          <li>Profile edit system (naam, avatar, bio)</li>
+          <li>Fully responsive — desktop aur mobile dono ke liye</li>
+          <li>Production build ready (Netlify deploy tested)</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:16px; font-weight:800; margin-bottom:12px; color:var(--slate);">🎯 Unique Features</h3>
+        <ul class="check-list">
+          <li>India-specific carbon emission factors use kiye gaye</li>
+          <li>IIT/NIT/BITS campus context — relevant to Indian students</li>
+          <li>Gamification: points, levels, daily streak goals</li>
+          <li>Claymorphism design system — premium feel</li>
+          <li>Quick Log: 3-click activity logging</li>
+          <li>Baseline quiz se personalized starting footprint</li>
+          <li>Weekly bar chart + sparkline analytics</li>
+          <li>Campus vs. You comparison bar</li>
+          <li>No backend needed — fully frontend</li>
+          <li>Gemini AI integration ready</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="background: linear-gradient(135deg, #064e3b, #0d9488); border-radius: 18px; padding: 32px; text-align:center; color: white;">
+      <div style="font-size: 40px; margin-bottom: 12px;">🌿</div>
+      <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 8px; letter-spacing:-0.5px;">EcoSelf</h3>
+      <p style="color: #6ee7b7; font-weight: 600; font-size: 14px; margin-bottom: 16px;">Track. Compete. Conserve.</p>
+      <p style="color: rgba(255,255,255,0.75); font-size: 13px; max-width: 480px; margin: 0 auto; line-height: 1.7;">
+        Yeh sirf ek web app nahi hai — yeh ek movement hai. Ek ek student ka footprint kam karna, campus ko greener banana, aur India ke future ko sustainable banana ka pehla kadam.
+      </p>
+      <div style="margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600;">React 19</span>
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600;">TypeScript</span>
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600;">Vite 6</span>
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600;">Tailwind CSS</span>
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600;">Gemini AI</span>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; text-align:center;">
+      <p style="font-size:12px; color:var(--slate-light);">© 2025 EcoSelf – Campus Green Stewardship & Analytics. All rights reserved.</p>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span>EcoSelf – Campus Sustainability Platform</span>
+    <span class="page-num">Page 9</span>
+  </div>
+</div>
+
+</body>
+</html>
