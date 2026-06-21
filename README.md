@@ -218,11 +218,6 @@ Verdant is designed to make this not just possible, but *engaging and competitiv
 
 ---
 
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
----
 
 <div align="center">
 Made with 🌿 for a greener campus India
