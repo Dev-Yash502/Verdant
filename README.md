@@ -6,9 +6,8 @@
 
 [![Challenge Vertical](https://img.shields.io/badge/Vertical-Environment%20%26%20Sustainability-green?style=for-the-badge)](.)
 [![Tech Stack](https://img.shields.io/badge/Stack-React%20%2B%20Vite%20%2B%20TypeScript-blue?style=for-the-badge)](.)
-[![AI Powered](https://img.shields.io/badge/AI-Gemini%20Powered-orange?style=for-the-badge&logo=google)](.)
 
-> A smart, AI-assisted carbon footprint tracker designed for Indian college campuses — helping students measure, reduce, and compete on their environmental impact in real time.
+> A smart, data-driven carbon footprint tracker designed for Indian college campuses — helping students measure, reduce, and compete on their environmental impact in real time.
 
 </div>
 
@@ -36,9 +35,9 @@ Verdant is a **context-aware sustainability assistant** built on four pillars:
 ┌─────────────────────────────────────────────────────┐
 │                   Verdant Platform                  │
 ├─────────────┬──────────────┬──────────┬─────────────┤
-│  Footprint  │  AI Insights │  Campus  │  Knowledge  │
+│  Footprint  │   Insights   │  Campus  │  Knowledge  │
 │  Tracking   │  & Targets   │  Compete │    Quiz     │
-│   Engine    │    (Gemini)  │  Board   │   Engine    │
+│   Engine    │  (Logic AI)  │  Board   │   Engine    │
 └─────────────┴──────────────┴──────────┴─────────────┘
 ```
 
@@ -51,7 +50,7 @@ Verdant is a **context-aware sustainability assistant** built on four pillars:
    - Plant-based meal offset: ~0.9 kg CO2e vs meat thali (~2.5 kg CO2e)
    - Public transit vs solo drive: ~1.8 kg CO2e saved per campus trip
 
-3. **AI Recommendations (Gemini)**: The Insights engine analyzes a user's footprint breakdown across 4 categories (Travel, Food, Energy, Waste) and generates ranked reduction targets with ROI (points + kg CO2 saved).
+3. **Smart Recommendations**: The Insights engine analyzes a user's footprint breakdown across 4 categories (Travel, Food, Energy, Waste) and generates ranked reduction targets with ROI (points + kg CO2 saved).
 
 4. **Gamification Loop**: Every logged action awards Stewardship Points → levels → leaderboard rank. This drives consistent daily engagement rather than one-off logging.
 
@@ -68,8 +67,8 @@ Landing Page → Baseline Quiz (3 Qs) → Dashboard
      │                                     │
      │                          ┌──────────┴──────────┐
      │                          │                     │
-     │                    Quick Log               AI Insights
-     │                  (one-tap actions)     (Gemini analysis)
+     │                    Quick Log            Smart Insights
+     │                  (one-tap actions)    (logic-driven)
      │                          │                     │
      │                    Points Earned         Reduction Targets
      └──────────────────── Leaderboard ◄─────────────┘
@@ -80,11 +79,11 @@ Landing Page → Baseline Quiz (3 Qs) → Dashboard
 
 ### Core Features
 
-| Feature | Description | AI Component |
+| Feature | Description | Type |
 |---|---|---|
 | **Footprint Dashboard** | Real-time carbon gauge, weekly trend chart, activity feed | — |
 | **Quick Log** | One-tap logging for common eco-actions (bottle, transit, vegan meal) | — |
-| **AI Insights** | Personalized carbon reduction targets with ROI scoring | ✅ Gemini API |
+| **Smart Insights** | Personalized carbon reduction targets with ROI scoring | ✅ Logic-driven |
 | **Sustainability Quiz** | 5-question eco-intelligence quiz with explanations | — |
 | **Campus Leaderboard** | Student & campus-level rankings with real-time position | — |
 | **Map Explorer** | Interactive campus eco-spot discovery with point rewards | — |
@@ -110,7 +109,6 @@ Frontend:    React 19 + TypeScript + Vite 6
 Styling:     Tailwind CSS v4 (utility-first, claymorphism design system)
 Icons:       Lucide React
 Animation:   Motion (Framer Motion v12)
-AI:          Google Gemini API (via @google/generative-ai)
 Storage:     localStorage (client-side persistence, no backend required)
 Build:       Vite ESBuild (< 3s hot reload)
 ```
@@ -123,24 +121,18 @@ Build:       Vite ESBuild (< 3s hot reload)
 
 - **Node.js** v18 or higher
 - **npm** v9 or higher
-- A **Google Gemini API Key** (free at [aistudio.google.com](https://aistudio.google.com))
 
 ### Installation
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/verdant.git
-cd verdant
+git clone https://github.com/Dev-Yash502/Verdant.git
+cd Verdant
 
 # 2. Install dependencies
 npm install
 
-# 3. Set up environment variables
-cp .env.example .env.local
-# Edit .env.local and add your Gemini API key:
-# GEMINI_API_KEY="your_actual_key_here"
-
-# 4. Start development server
+# 3. Start development server
 npm run dev
 # → App runs at http://localhost:3000
 ```
@@ -195,7 +187,7 @@ verdant/
 
 3. **Simulated leaderboard**: Campus-wide rankings are populated with seed data to demonstrate the UI. In production, these would be aggregated from real user accounts.
 
-4. **AI insights are contextual**: The Gemini API integration provides personalized reduction recommendations based on the user's current footprint profile, not generic tips.
+4. **Insights are logic-driven**: Reduction recommendations are generated based on the user's current footprint profile — highest-impact category gets the top suggestion, making them personalized without needing an external API.
 
 5. **Gamification over accuracy**: Points and levels are designed to maximize engagement and behavior change. Exact CO2 precision is secondary to consistent daily action logging.
 
@@ -208,11 +200,11 @@ verdant/
 | Criteria | Implementation |
 |---|---|
 | **Code Quality** | TypeScript throughout, component-based architecture, clear separation of concerns, consistent naming |
-| **Security** | API key via environment variables only (never in code), `.env*` in `.gitignore`, no PII stored |
+| **Security** | No API keys in code, `.env*` in `.gitignore`, no PII stored |
 | **Efficiency** | Vite for fast builds, lazy component loading, localStorage for zero-latency persistence, no unnecessary re-renders |
 | **Testing** | TypeScript strict mode catches type errors; component logic is pure and testable |
 | **Accessibility** | Semantic HTML5, `alt` text on all images, keyboard-navigable buttons, ARIA-compatible structure |
-| **Smart Assistant** | Baseline quiz drives personalized footprint; AI Insights provide contextual, ranked recommendations |
+| **Smart Assistant** | Baseline quiz drives personalized footprint; Smart Insights provide contextual, ranked reduction targets |
 | **Logical Decisions** | Context-aware starting values, one-time reduction locks, adaptive point scaling, daily score reset |
 | **Real-world Usability** | India-specific data, mobile-first responsive design, one-tap quick logging for daily habits |
 
